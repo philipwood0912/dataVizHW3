@@ -35,6 +35,11 @@ with open('data/medal_data.csv') as csvfile:
 			medalData = row[7]
 
 			if countryData == "CAN":
+				if genderData == "Men":
+					men.append(genderData)
+				else:
+					women.append(genderData)
+				
 				if medalData == "Gold":
 					if int(yearData) < 1990:
 						goldbefore1990.append(medalData)
@@ -53,6 +58,7 @@ with open('data/medal_data.csv') as csvfile:
 					else:
 						bronzeafter1990.append(medalData)
 
+
 			if medalData == "Gold":
 				if countryData == "CAN":
 					canadaGold.append(medalData)
@@ -70,11 +76,6 @@ with open('data/medal_data.csv') as csvfile:
 					canadaBronze.append(medalData)
 				if countryData == "USA":
 					usaBronze.append(medalData)
-
-			if genderData == "Men":
-				men.append(genderData)
-			else:
-				women.append(genderData)
 			
 			line_count += 1
 
@@ -135,7 +136,7 @@ totalBronze = bronzeafter1990.count("Bronze") + bronzebefore1990.count("Bronze")
 #bronzeAfter_percent = 100 - bronzeBefore_percent
 #print(bronzeAfter_percent)
 
-print("Men vs Women %")
+print("CAN Men vs Women %")
 totalGender = men.count("Men") + women.count("Women")
 men_percent = men.count("Men") / totalGender * 100
 print(men_percent)
@@ -163,6 +164,7 @@ print(canadaBronze_percent)
 usaBronze_percent = 100 - canadaBronze_percent
 print(usaBronze_percent)
 
+# CAN medals bar graph before and after 1990 
 np_medal = 3
 before = (bronzebefore, silverbefore, goldbefore)
 after = (bronzeafter, silverafter, goldafter)
@@ -191,23 +193,54 @@ ax.legend()
 fig.tight_layout()
 plt.show()
 
-
-
-
-
-
-
-
-
+# pie chart for CAN  men vs women
 labels = "Men", "Women"
 sizes = [men_percent, women_percent]
 colors = ["blue", "pink"]
-explode = (0.1, 0.1, 0.15)
 
-plt.pie(sizes, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
+plt.pie(sizes, colors=colors, autopct='%1.1f%%', shadow=False, startangle=140)
 
 plt.axis('equal')
 plt.legend(labels, loc=1)
-plt.title("Men vs Women in Olympics")
-plt.xlabel("Total Men: 3944 Total Women: 1826")
+plt.title("Canadian Men vs Women in Olympics")
+plt.xlabel("Total Men: 386 Total Women: 239")
+plt.show()
+
+# pie chart for CAN vs USA gold medals
+labels = "Canada", "USA"
+sizes = [canadaGold_percent, usaGold_percent]
+colors = ["crimson", "cyan"]
+
+plt.pie(sizes, colors=colors, autopct='%1.1f%%', shadow=False, startangle=140)
+
+plt.axis('equal')
+plt.legend(labels, loc=1)
+plt.title("Canada vs USA Gold Medals")
+plt.xlabel("Total Canada: 315 Total USA: 167")
+plt.show()
+
+# pie chart for CAN vs USA silver medals
+labels = "Canada", "USA"
+sizes = [canadaSilver_percent, usaSilver_percent]
+colors = ["crimson", "cyan"]
+
+plt.pie(sizes, colors=colors, autopct='%1.1f%%', shadow=False, startangle=140)
+
+plt.axis('equal')
+plt.legend(labels, loc=1)
+plt.title("Canada vs USA Silver Medals")
+plt.xlabel("Total Canada: 203 Total USA: 319")
+plt.show()
+
+# pie chart for CAN vs USA bronze medals
+labels = "Canada", "USA"
+sizes = [canadaBronze_percent, usaBronze_percent]
+colors = ["crimson", "cyan"]
+
+plt.pie(sizes, colors=colors, autopct='%1.1f%%', shadow=False, startangle=140)
+
+plt.axis('equal')
+plt.legend(labels, loc=1)
+plt.title("Canada vs USA Bronze Medals")
+plt.xlabel("Total Canada: 107 Total USA: 167")
 plt.show()
