@@ -58,3 +58,27 @@ p
     margin-top: 100px;
     margin-bottom: 100px;
 }
+
+.pic
+{
+    width: 325px;
+    height: 560px;
+    margin-top: 50px;
+}
+
+.pic1
+{
+    float: left;
+}
+
+.pic2
+{
+    float: right;
+}
+
+.hockey
+{
+    margin-top: 100px;
+}
+
+
